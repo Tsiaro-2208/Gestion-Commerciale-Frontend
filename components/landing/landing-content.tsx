@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Button } from "../ui/button"
 
 const LandingContent = () => {
@@ -7,8 +8,10 @@ const LandingContent = () => {
                 <h1 className="text-4xl md:text-3xl font-bold">Gerez efficacement votre activité commerciale sur une seule plateforme</h1>
                 <p className="text-lg font-medium">Simplifiez votre quotidien et optimisez vos ventes</p>
                 <div className="flex items-center gap-4 mt-10">
-                    <Button variant="outline" className="px-10 py-6 rounded-full">Se connecter</Button>
-                    <Button className="px-10 py-6 rounded-full">S'inscrire</Button>
+                    <Button variant="outline" className="px-10 py-6 rounded-full">En savoir plus</Button>
+                    <Link href="/auth">
+                        <Button className="px-10 py-6 rounded-full">Commencer</Button>
+                    </Link>
                 </div>
             </div>
         </div>
