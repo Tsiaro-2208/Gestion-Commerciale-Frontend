@@ -2,9 +2,24 @@
 import { RegisterFormSchema } from "@/schemas/auth-schemas"
 import AutoForm, { AutoFormSubmit } from "../ui/auto-form"
 import AuthForm from "./auth-form"
+import { authClient } from "@/lib/services/auth-services"
+import { toast } from "sonner"
 
-const handleSubmit = (data: RegisterFormSchema) => {
-    console.log(data)
+const handleSubmit = async (submittedData: RegisterFormSchema) => {
+    const { data, error } = await authClient.signUp.email({
+        name: submittedData.username,
+        email: submittedData.email,
+        password: submittedData.password,
+        callbackURL: "/main",
+    });
+    if (data) {
+        toast.success("Inscription reussie")
+        console.log(data)
+    }
+    if (error) {
+        toast.error("Erreur d'inscription")
+        console.log(error)
+    }
 }
 const RegisterForm = () => {
     return (

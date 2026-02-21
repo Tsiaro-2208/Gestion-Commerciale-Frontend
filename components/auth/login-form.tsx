@@ -2,13 +2,25 @@
 
 import { LoginFormSchema } from '@/schemas/auth-schemas'
 import AutoForm, { AutoFormSubmit } from '../ui/auto-form'
-import { Button } from '../ui/button'
-import { Separator } from '../ui/separator'
 import AuthForm from './auth-form'
+import { authClient } from '@/lib/services/auth-services'
+import { toast } from 'sonner'
 
 const LoginForm = () => {
-    const handleSubmit = (data: LoginFormSchema) => {
-        console.log(data)
+    const handleSubmit = async (submittedData: LoginFormSchema) => {
+        const { data, error } = await authClient.signIn.email({
+            email: submittedData.email,
+            password: submittedData.password,
+            callbackURL: "/main",
+        });
+        if (data) {
+            toast.success("Connexion reussie")
+            console.log(data)
+        }
+        if (error) {
+            toast.error("Erreur de connexion")
+            console.log(error)
+        }
     }
 
     return (

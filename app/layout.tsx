@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { Toaster } from "sonner";
 
 const quicksand = localFont({
   src: './fonts/Quicksand-Regular.ttf',
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body
         className={`${quicksand.className} antialiased`}
       >
+        <Toaster position="top-center" richColors />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

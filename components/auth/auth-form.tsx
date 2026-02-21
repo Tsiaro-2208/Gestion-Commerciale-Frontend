@@ -14,7 +14,7 @@ const AuthForm = ({ children }: { children: React.ReactNode }) => {
                     <Separator />
                 </div>
                 <div className="relative flex justify-center text-xs uppercase">
-                    <span className="bg-foreground dark:bg-zinc-950 px-3 text-muted-foreground font-medium">
+                    <span className="bg-background px-3 text-muted-foreground font-medium">
                         Ou continuer avec
                     </span>
                 </div>
