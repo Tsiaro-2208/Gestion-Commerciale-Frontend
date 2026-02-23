@@ -5,9 +5,13 @@ import AutoForm, { AutoFormSubmit } from '../ui/auto-form'
 import AuthForm from './auth-form'
 import { authClient } from '@/lib/services/auth-services'
 import { toast } from 'sonner'
+import { useState } from 'react'
+import { Loader2 } from 'lucide-react'
 
 const LoginForm = () => {
+    const [loading, setLoading] = useState(false)
     const handleSubmit = async (submittedData: LoginFormSchema) => {
+        setLoading(true)
         const { data, error } = await authClient.signIn.email({
             email: submittedData.email,
             password: submittedData.password,
@@ -15,12 +19,14 @@ const LoginForm = () => {
         });
         if (data) {
             toast.success("Connexion reussie")
-            console.log(data)
+            console.log(data);
+            localStorage.setItem("user", JSON.stringify({ name: data.user.name, email: data.user.email, image: data.user.image }))
+
         }
         if (error) {
             toast.error("Erreur de connexion")
-            console.log(error)
         }
+        setLoading(false)
     }
 
     return (
@@ -48,7 +54,7 @@ const LoginForm = () => {
                 }}
             >
                 <AutoFormSubmit className='w-full py-5 mt-4 bg-emerald-500 hover:bg-emerald-600 shadow-lg shadow-emerald-500/20 transition-all hover:scale-[1.02] active:scale-[0.98] border-none'>
-                    Se connecter
+                    {loading ? <Loader2 className='h-5 w-5 animate-spin' /> : 'Se connecter'}
                 </AutoFormSubmit>
             </AutoForm>
         </AuthForm>

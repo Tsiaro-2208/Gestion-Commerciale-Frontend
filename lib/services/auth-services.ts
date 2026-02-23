@@ -1,6 +1,6 @@
 import { createAuthClient } from "better-auth/react"
 export const authClient = createAuthClient({
-    baseURL: process.env.BETTER_AUTH_URL
+    baseURL: process.env.NEXT_PUBLIC_BETTER_AUTH_URL
 })
 
 export const signUp = async (name: string, email: string, password: string) => {
@@ -8,7 +8,7 @@ export const signUp = async (name: string, email: string, password: string) => {
         name,
         email,
         password,
-        callbackURL: `${process.env.BETTER_AUTH_URL}/main`,
+        callbackURL: `${process.env.NEXT_PUBLIC_BETTER_AUTH_URL}/main`,
     });
     if (error) {
         console.error("Error signing up:", error);
@@ -21,7 +21,7 @@ export const signIn = async (email: string, password: string) => {
     const { data, error } = await authClient.signIn.email({
         email,
         password,
-        callbackURL: `${process.env.BETTER_AUTH_URL}/main`,
+        callbackURL: `${process.env.NEXT_PUBLIC_BETTER_AUTH_URL}/main`,
     });
     if (error) {
         console.error("Error signing in:", error);
